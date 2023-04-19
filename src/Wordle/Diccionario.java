@@ -41,9 +41,7 @@ public class Diccionario {
 			Random random = new Random();
 			int numero = random.nextInt(10856);
 			
-			for (int i = 0; i <= numero; i++) {
-	            palabra = bufferedReader.readLine();
-	        }
+			for (int i = 0; i <= numero; i++) palabra = bufferedReader.readLine();
 			
 			fileReader.close();
 			bufferedReader.close();

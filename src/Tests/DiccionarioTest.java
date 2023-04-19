@@ -1,4 +1,5 @@
 package Tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -29,7 +30,7 @@ public class DiccionarioTest {
 
 	@Test
 	public void testVerificarPalabraTRUE() {
-		boolean result = Diccionario.verificarPalabra("arbol");
+		boolean result = Diccionario.verificarPalabra("zuzon");
 		assertEquals(true, result);
 	}
 

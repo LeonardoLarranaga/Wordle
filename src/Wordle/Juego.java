@@ -1,36 +1,39 @@
 package Wordle;
-import java.util.Scanner;
+
+import Interfaces.*;
 
 public class Juego {
-
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("\t\tWordle");
-		imprimirInstrucciones();
-		
-		System.out.println("\n\nPresiona enter para jugar.");
-		scanner.nextLine();
-		
-		//TODO: Hacer el juego, pues.
-		
-		scanner.close();
+	InterfazTablero tablero;
+	InterfazTeclado teclado;
+	String palabra;
+	
+	public Juego(InterfazTablero tablero, InterfazTeclado teclado) {
+		this.tablero = tablero;
+		this.teclado = teclado;
+		palabra = Diccionario.generarPalabra();
 	}
 	
-	public static void imprimirInstrucciones() {
-		System.out.println("\n\n\nSolo tienes 6 intentos. Úsalos sabiamente.");
-		System.out.println("\nCada intento debe ser una palabra válida de 5 letras.");
-		System.out.println("No puedes indicar palabras que no tengan sentido o letras aleatorias.");
-		System.out.println("\nDespués de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar la palabra.");
-		System.out.println("\nMira este ejemplo:\n\n");
+	public void jugar() {
+		String intento = "";
 		
-		System.out.println(LetraEnColor.verde("A") + "BEJA");
-		System.out.println("La letra A está en la palabra y en el lugar correcto.");
+		tablero.mostrarInstrucciones();
 		
-		System.out.println("\nFL" + LetraEnColor.amarillo("A") + "CO");
-		System.out.println("La letra A está en la palabra pero en el lugar equivocado.");
+		for(int i = 0; i < 6; i++) {
+			tablero.limpiarPantalla();
+			
+			tablero.desplegar();
+			teclado.desplegar();
+			
+			intento = teclado.leerIntento();
+			
+			tablero.getIntento(palabra, intento);
+			teclado.getIntento(palabra, intento);
+			
+			if (intento.equalsIgnoreCase(palabra)) break;
+		}
 		
-		System.out.println("\nJU" + LetraEnColor.gris("G") + "AR");
-		System.out.println("La letra G no está en la palabra en ningún lugar.");
+		tablero.desplegar();
+		teclado.desplegar();
+		tablero.mostrarResultado(palabra, intento);
 	}
 }

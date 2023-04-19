@@ -1,4 +1,4 @@
-package Wordle;
+package Consola;
 
 public class LetraEnColor {
 	public static String verde(String letra) {
