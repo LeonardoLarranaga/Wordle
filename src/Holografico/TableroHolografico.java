@@ -170,19 +170,19 @@ public class TableroHolografico implements InterfazTablero {
 	public void mostrarResultado(String palabra, String ultimoIntento) {
 		canvas.erase();
 		desplegar();
-		canvas.setFont(new Font("Helvetica", Font.BOLD, 32));
+		canvas.setFont(new Font("Helvetica", Font.BOLD, 24));
 		
 		if (palabra.equalsIgnoreCase(ultimoIntento)) {
 			canvas.setForegroundColor(Color.decode("#68A263"));
 			canvas.drawString("¡Acertaste!", 10, 340);
 		} else {
-			canvas.setForegroundColor(Color.red);
+			canvas.setForegroundColor(Color.decode("#9F03E2"));
 			canvas.drawString("¡Perdiste! La palabra era: " + palabra + ".", 10, 340);
 		}
 		
-		canvas.setFont(new Font("Helvetica", Font.BOLD, 24));
+		canvas.setFont(new Font("Helvetica", Font.BOLD, 18));
 		canvas.setForegroundColor(Color.decode("#1083BC"));
-		canvas.drawString("Da clic para cerrar Wordle.", 10, 400);
+		canvas.drawString("Da clic para cerrar Wordle.", 10, 370);
 		clickEnabled = 1;
 		
 		synchronized(TableroHolografico.canvas) {
