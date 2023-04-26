@@ -2,6 +2,8 @@ package Holografico;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.*;
 
 /**
@@ -14,7 +16,7 @@ import java.awt.geom.*;
  * @version 2016.02.29
  */
 
-public class Canvas
+public class Canvas implements MouseListener
 {
     private JFrame frame;
     private CanvasPane canvas;
@@ -82,6 +84,7 @@ public class Canvas
             graphic.setColor(Color.black);
         }
         frame.setVisible(true);
+        canvas.addMouseListener(this);
     }
 
     /**
@@ -364,4 +367,32 @@ public class Canvas
             g.drawImage(canvasImage, 0, 0, null);
         }
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (TableroHolografico.clickEnabled == 0 || TableroHolografico.clickEnabled == 1) {
+			synchronized(TableroHolografico.canvas) {
+			    TableroHolografico.canvas.notify();
+			    TableroHolografico.clickEnabled = 2;
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {		
+	}
 }

@@ -2,7 +2,6 @@ package Holografico;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 import Interfaces.InterfazTablero;
@@ -11,6 +10,7 @@ import Wordle.Letra.Estado;
 
 public class TableroHolografico implements InterfazTablero {
 	public static Canvas canvas;
+	public static int clickEnabled = 0;
 	
 	ArrayList<ArrayList<Letra>> palabras = new ArrayList<ArrayList<Letra>>();
 	
@@ -120,13 +120,19 @@ public class TableroHolografico implements InterfazTablero {
 		
 		canvas.drawString("La letra G no está en la palabra en ningún lugar.", 10, 395);
 		
+		canvas.setForegroundColor(Color.decode("#1083BC"));
+		
+		canvas.setFont(new Font("Helvetica", Font.BOLD, 18));
+		canvas.drawString("¡Da clic para jugar!", 10, 425);
+		
 		canvas.setFont(new Font("Helvetica", Font.BOLD, 24));
 		
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("\n\nPresiona enter para jugar...");
-		scanner.nextLine();
+		synchronized(TableroHolografico.canvas) {
+		    try {
+		    	TableroHolografico.canvas.wait();
+		    } catch (InterruptedException e) {
+		    }
+		}
 	}
 
 	@Override
@@ -162,14 +168,30 @@ public class TableroHolografico implements InterfazTablero {
 
 	@Override
 	public void mostrarResultado(String palabra, String ultimoIntento) {
+		canvas.erase();
+		desplegar();
 		canvas.setFont(new Font("Helvetica", Font.BOLD, 32));
 		
 		if (palabra.equalsIgnoreCase(ultimoIntento)) {
 			canvas.setForegroundColor(Color.decode("#68A263"));
-			canvas.drawString("¡Acertaste!", 10, 50);
+			canvas.drawString("¡Acertaste!", 10, 340);
 		} else {
 			canvas.setForegroundColor(Color.red);
-			canvas.drawString("¡Perdiste! La palabra era: " + palabra + ".", 10, 50);
+			canvas.drawString("¡Perdiste! La palabra era: " + palabra + ".", 10, 340);
 		}
+		
+		canvas.setFont(new Font("Helvetica", Font.BOLD, 24));
+		canvas.setForegroundColor(Color.decode("#1083BC"));
+		canvas.drawString("Da clic para cerrar Wordle.", 10, 400);
+		clickEnabled = 1;
+		
+		synchronized(TableroHolografico.canvas) {
+		    try {
+		    	TableroHolografico.canvas.wait();
+		    } catch (InterruptedException e) {
+		    }
+		}
+		
+		System.exit(0);
 	}
 }
