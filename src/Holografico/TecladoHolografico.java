@@ -1,18 +1,18 @@
-package Consola;
+package Holografico;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import Interfaces.InterfazTeclado;
 import Wordle.Diccionario;
 import Wordle.Letra;
 import Wordle.Letra.Estado;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+public class TecladoHolografico implements InterfazTeclado {
 
-public class TecladoConsola implements InterfazTeclado {
-	
 	ArrayList<Letra> letras = new ArrayList<Letra>();
 	
-	public TecladoConsola() {
+	public TecladoHolografico() {
 		String[] qwerty = "QWERTYUIOPASDFGHJKLÑZXCVBNM".split("");
 		
 		for (String letra : qwerty) {
@@ -22,17 +22,13 @@ public class TecladoConsola implements InterfazTeclado {
 	
 	@Override
 	public void desplegar() {
-		for(int i = 0; i < 10; i++) System.out.print(letras.get(i).toString() + "\t");
+		for(int i = 0; i < 10; i++) letras.get(i).drawOnCanvas(i * 45 + 60, 300);
 		
-		System.out.println("\n");
-		for(int i = 10; i < 20; i++) System.out.print(letras.get(i).toString() + "\t");
+		for(int i = 10; i < 20; i++) letras.get(i).drawOnCanvas((i - 10) * 45 + 60, 345);
 	
-		
-		System.out.print("\n\n\t");
-		for(int i = 20; i < 27; i++) System.out.print(letras.get(i).toString() + "\t");
-		System.out.println("\n");
+		for(int i = 20; i < 27; i++) letras.get(i).drawOnCanvas((i - 20) * 45 + 130, 390);
 	}
-	
+
 	@Override
 	public String leerIntento() {
 		@SuppressWarnings("resource")
@@ -90,4 +86,5 @@ public class TecladoConsola implements InterfazTeclado {
 			copia.remove(0);
 		}
 	}
+
 }

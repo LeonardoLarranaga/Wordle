@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Consola.Letra;
-import Consola.Letra.Estado;
+import Wordle.Letra;
+import Wordle.Letra.Estado;
 
 public class LetraTest {
 

@@ -1,11 +1,10 @@
 package Consola;
 
 import Interfaces.InterfazTablero;
+import Wordle.Letra;
+import Wordle.Letra.Estado;
 
 import java.util.Scanner;
-
-import Consola.Letra.Estado;
-
 import java.util.ArrayList;
 
 public class TableroConsola implements InterfazTablero {
